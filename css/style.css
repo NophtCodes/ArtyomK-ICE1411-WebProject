@@ -109,7 +109,7 @@ header {
   box-shadow: -1px 15px 47px -18px rgba(0, 0, 0, 0.75);
 }
 
- .menu {
+.menu {
   position: relative;
   display: flex;
   justify-content: space-around;
@@ -118,7 +118,7 @@ header {
   align-items: center;
 }
 
- .menu li a {
+.menu li a {
   color: #130f26;
 }
 
@@ -302,8 +302,7 @@ footer .container a {
   gap: 8px
 }
 
-
-
+/* Media queries for responsiveness */
 @media screen and (max-width:700px) {
   h1 {
     font-size: 3rem
@@ -313,6 +312,7 @@ footer .container a {
     text-align: center;
     max-width: 100%;
     justify-content: center;
+    font-size: 14px;
   }
 
   .about-main .container .row .about-text {
@@ -327,6 +327,10 @@ footer .container a {
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+  }
+
+  .about-main h2 {
+    display: none;
   }
 
   .menu-burger {
@@ -407,8 +411,16 @@ footer .container a {
   }
 
   .about-main {
-    top: 25%;
-    font-size: 14px;
+    top: 20%;
+
+  }
+
+  .about-main .container .row .about-text p {
+    line-height: 1rem;
+  }
+
+  .about-main .container .row .about-data p {
+    line-height: 1.4rem;
   }
 
   .gallery-item h5 {
@@ -426,15 +438,16 @@ footer .container a {
   }
 
   .gallery {
-    padding: 1rem;
-    grid-gap: 1rem;
+    padding: 1rem !important;
+    grid-gap: 1rem !important;
   }
 
-  .gallery-item {
-    height: 8rem;
+  .gallery .gallery-item {
+    height: 6rem !important;
   }
 }
 
+/* Animation and canvas */
 #particles-js {
   overflow: hidden;
   height: 100vh !important;

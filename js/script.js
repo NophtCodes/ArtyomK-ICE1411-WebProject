@@ -117,12 +117,17 @@ particlesJS("particles-js", {
     }
 });
 
-function setupNav() {
-    const currentUrl = document.location.href;
-    const navListItems = document.querySelectorAll('.menu-item');
 
+// Sets active class to the current page in the navigation menu
+function setupNav() {
+    const currentUrl = document.location.href; // current URL
+    const navListItems = document.querySelectorAll('.menu-item'); // all menu items
+
+    // Loop through each element
     navListItems.forEach(navListItem => {
         const navLink = navListItem.querySelector('a');
+
+        // check if the link matches the current URL
         if (navLink.href === currentUrl) {
             navListItem.classList.add('active');
         } else {
@@ -131,13 +136,16 @@ function setupNav() {
     });
 }
 
+// Responsive burger menu
 function setupBurgerMenu() {
-    const navMenu = document.querySelector('.menu-responsive');
-    const burgerBtn = document.querySelector('.menu-burger');
-    const main = document.querySelector('main');
-    const footer = document.querySelector('footer');
-    const logo = document.querySelector('.hello');
+    // Get DOM elements 
+    const navMenu = document.querySelector('.menu-responsive'),
+        burgerBtn = document.querySelector('.menu-burger'),
+        main = document.querySelector('main'),
+        footer = document.querySelector('footer'),
+        logo = document.querySelector('.hello');
 
+    // listener for click event on the burger button and toggle classes
     burgerBtn.addEventListener('click', () => {
         navMenu.classList.toggle('menu-active');
         burgerBtn.classList.toggle('active');
@@ -147,23 +155,30 @@ function setupBurgerMenu() {
     });
 }
 
+// Generates the gallery from JSON file 
 function generateGallery(json) {
     const images = json.images;
     const gallery = document.querySelector('.gallery');
 
+    // Iterates through the images
     for (let i = 0; i < images.length; i++) {
-        const galleryItem = document.createElement('div');
-        const galleryImg = document.createElement('img');
-        const galleryLink = document.createElement('a');
-        const galleryCaption = document.createElement('h5');
+
+        // Create elements
+        const galleryItem = document.createElement('div'),
+            galleryImg = document.createElement('img'),
+            galleryLink = document.createElement('a'),
+            galleryCaption = document.createElement('h5');
+
+        // Gallery structure and attributes for images and "a" tags
         galleryLink.href = images[i].link;
         galleryItem.classList.add('gallery-item');
         galleryImg.classList.add('gallery-img');
         galleryImg.src = images[i].link;
         galleryImg.alt = images[i].caption;
-        galleryImg.crossorigin = "anonymous";
         galleryCaption.innerText = images[i].caption;
         galleryCaption.style = "text-align:center";
+
+        // Appending all elements
         gallery.appendChild(galleryItem);
         galleryItem.appendChild(galleryLink);
         galleryItem.appendChild(galleryCaption);
@@ -171,6 +186,7 @@ function generateGallery(json) {
     }
 }
 
+// function to get the gallery
 function loadGallery() {
     fetch('JSON/gallery.json')
         .then(response => response.json())
@@ -182,20 +198,25 @@ function loadGallery() {
         });
 }
 
+// Generate the carousel from the JSON
 function generateCarousel(json) {
-    const carousel = document.querySelector('.carousel');
-    const slidesContainer = carousel.querySelector('.slides');
-    const prevButton = carousel.querySelector('.prev');
-    const nextButton = carousel.querySelector('.next');
-    const slideWidth = slidesContainer.clientWidth;
+    // Get DOM elements
+    const carousel = document.querySelector('.carousel'),
+        slidesContainer = carousel.querySelector('.slides'),
+        prevButton = carousel.querySelector('.prev'),
+        nextButton = carousel.querySelector('.next'),
+        slideWidth = slidesContainer.clientWidth;
 
-    let slideIndex = 0;
-    let slides = [];
+    let slideIndex = 0, // index of the current slide
+        slides = []; // array to store slides
 
+
+    // Function to display the slide at the index
     function showSlide(index) {
         slidesContainer.style.transform = `translateX(-${slideWidth * index}px)`
     }
 
+    // go to the previous slide
     function prevSlide() {
         slideIndex--;
         if (slideIndex < 0) {
@@ -204,6 +225,7 @@ function generateCarousel(json) {
         showSlide(slideIndex);
     }
 
+    // go to the next slide
     function nextSlide() {
         slideIndex++;
         if (slideIndex > slides.length - 1) {
@@ -212,6 +234,7 @@ function generateCarousel(json) {
         showSlide(slideIndex);
     }
 
+    // Function to create the slides using the JSON 
     function createSlide(slide) {
         slides = slide.images;
         for (let i = 0; i < slides.length; i++) {
@@ -221,13 +244,17 @@ function generateCarousel(json) {
         }
     }
 
+    // Call functions
     createSlide(json);
     showSlide(slideIndex);
 
+
+    // Adds event listeners for the prev and next buttons
     prevButton.addEventListener('click', prevSlide);
     nextButton.addEventListener('click', nextSlide);
 }
 
+// Load carousel from JSON file
 function loadCarousel() {
     fetch('JSON/gallery.json')
         .then(response => response.json())
@@ -239,7 +266,7 @@ function loadCarousel() {
         });
 }
 
-
+// Call all functions
 window.addEventListener('DOMContentLoaded', () => {
     setupNav();
     setupBurgerMenu();
