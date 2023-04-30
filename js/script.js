@@ -172,7 +172,7 @@ function generateGallery(json) {
 }
 
 function loadGallery() {
-    fetch('/JSON/gallery.json')
+    fetch('JSON/gallery.json')
         .then(response => response.json())
         .then(data => {
             generateGallery(data);
@@ -229,7 +229,7 @@ function generateCarousel(json) {
 }
 
 function loadCarousel() {
-    fetch('/JSON/gallery.json')
+    fetch('JSON/gallery.json')
         .then(response => response.json())
         .then(images => {
             generateCarousel(images);
